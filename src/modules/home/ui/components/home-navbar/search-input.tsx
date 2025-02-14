@@ -15,7 +15,7 @@ const SearchInput = () => {
       </div>
       <button
         type="submit"
-        className="px-5 py-2.5 bg-gray-100 border border-l-0 rounded-r-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+        className="px-4 py-2.5 border border-l-0 rounded-r-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-primary"
       >
         <SearchIcon className="size-5" />
       </button>
