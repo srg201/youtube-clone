@@ -25,7 +25,7 @@ const HomeNavbar = () => {
           <SearchInput />
         </div>
 
-        <div className="flex-shrink-0 items-center flex gap-4">
+        <div className="flex-shrink-0 items-center flex gap-2">
           <ThemeToggle />
           <AuthButton />
         </div>

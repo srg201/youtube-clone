@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { TRPCProvider } from "@/trpc/client";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -29,7 +30,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <TRPCProvider>{children}</TRPCProvider>
           </ThemeProvider>
         </body>
       </html>
