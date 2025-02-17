@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { TRPCProvider } from "@/trpc/client";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -30,7 +31,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <TRPCProvider>{children}</TRPCProvider>
+            <TRPCProvider>
+              <Toaster richColors position="top-center" closeButton />
+              {children}
+            </TRPCProvider>
           </ThemeProvider>
         </body>
       </html>

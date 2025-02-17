@@ -25,7 +25,7 @@ const StudioSidebar = () => {
             <SidebarMenuItem>
               <SidebarMenuButton
                 isActive={pathname === "/studio"}
-                tooltip={"Exit studio"}
+                tooltip={"Content"}
                 asChild
               >
                 <Link href={"/studio/videos"}>
