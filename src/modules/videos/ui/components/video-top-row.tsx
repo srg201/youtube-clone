@@ -12,11 +12,13 @@ interface VideoTopRowProps {
 
 const VideoTopRow = ({ video }: VideoTopRowProps) => {
   const compactViews = useMemo(() => {
-    return new Intl.NumberFormat("en", { notation: "compact" }).format(1000200);
+    return new Intl.NumberFormat("en", { notation: "compact" }).format(
+      video.viewCount
+    );
   }, []);
   const expandedViews = useMemo(() => {
     return new Intl.NumberFormat("en", { notation: "standard" }).format(
-      1000200
+      video.viewCount
     );
   }, []);
   const compactDate = useMemo(() => {
