@@ -36,7 +36,10 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(
   const { ctx } = opts;
 
   if (!ctx.clerkUserId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You must be authorized to do this action",
+    });
   }
 
   const [user] = await db
@@ -46,13 +49,19 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(
     .limit(1);
 
   if (!user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You must be authorized to do this action",
+    });
   }
 
   const { success } = await ratelimit.limit(user.id);
 
   if (!success) {
-    throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+    throw new TRPCError({
+      code: "TOO_MANY_REQUESTS",
+      message: "Too many requests. Try again later!",
+    });
   }
 
   return opts.next({
