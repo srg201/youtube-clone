@@ -110,6 +110,14 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       toast.error(error.message);
     },
   });
+  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
+    onSuccess: () => {
+      toast.success("Video thumbnail has been generated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   const form = useForm<z.infer<typeof videoUpdateSchema>>({
     resolver: zodResolver(videoUpdateSchema),
@@ -244,7 +252,11 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             >
                               <ImagePlusIcon className="size-4 mr-1" /> Change
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() =>
+                                generateThumbnail.mutate({ id: videoId })
+                              }
+                            >
                               <SparklesIcon className="size-4 mr-1" />{" "}
                               AI-Generated
                             </DropdownMenuItem>

@@ -6,13 +6,13 @@ import { THUMBNAIL_FALLBACK } from "../../constants";
 interface VideoPlayerProps {
   playbackId?: string | null;
   thumbnailUrl?: string | null;
-  autoplay?: boolean;
+  autoPlay?: boolean;
   onPlay: () => void;
 }
 
 const VideoPlayer = ({
   onPlay,
-  autoplay,
+  autoPlay,
   playbackId,
   thumbnailUrl,
 }: VideoPlayerProps) => {
@@ -22,7 +22,7 @@ const VideoPlayer = ({
       playbackId={playbackId}
       poster={thumbnailUrl ?? THUMBNAIL_FALLBACK}
       playerInitTime={0}
-      autoPlay={autoplay}
+      autoPlay={autoPlay}
       thumbnailTime={0}
       className="w-full h-full object-contain"
       accentColor="#ff2056"
