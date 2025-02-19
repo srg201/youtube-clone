@@ -1,7 +1,39 @@
-import React from "react";
+"use client";
+import CommentForm from "@/modules/comments/ui/components/comment-form";
+import { trpc } from "@/trpc/client";
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import CommentItem from "./comment-item";
 
-const CommentsSection = () => {
-  return <div>CommentsSection</div>;
+interface CommentsSectionProps {
+  videoId: string;
+}
+
+const CommentsSection = ({ videoId }: CommentsSectionProps) => {
+  return (
+    <Suspense fallback={<p>Loading</p>}>
+      <ErrorBoundary fallback={<p>Error...</p>}>
+        <CommentsSectionSuspense videoId={videoId} />
+      </ErrorBoundary>
+    </Suspense>
+  );
+};
+
+const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
+  const [comments] = trpc.comments.getMany.useSuspenseQuery({ videoId });
+  return (
+    <div className="mt-6">
+      <div className="flex flex-col gap-6">
+        <h1>0 Comments</h1>
+        <CommentForm videoId={videoId} />
+        <div className="flex flex-col gap-4 mt-2 ">
+          {comments.map((comment) => (
+            <CommentItem comment={comment} key={comment.id} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CommentsSection;
