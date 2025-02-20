@@ -54,6 +54,7 @@ import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
 import ThumbnailUploadModal from "../components/thumbnail-upload-modal";
 import ThumbnailGenerateModal from "../components/thumbnail-generate-modal";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useClerk } from "@clerk/nextjs";
 
 interface FormSectionProps {
   videoId: string;
@@ -128,6 +129,7 @@ const FormSectionSkeleton = () => {
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const router = useRouter();
+  const clerk = useClerk();
   const [isCopied, setIsCopied] = useState(false);
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
@@ -145,6 +147,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     },
     onError: (error) => {
       toast.error(error.message);
+      if (error?.data?.code === "UNAUTHORIZED") {
+        clerk.openSignIn();
+      }
     },
   });
   const remove = trpc.videos.remove.useMutation({
@@ -155,6 +160,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     },
     onError: (error) => {
       toast.error(error.message);
+      if (error?.data?.code === "UNAUTHORIZED") {
+        clerk.openSignIn();
+      }
     },
   });
   const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
@@ -357,7 +365,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             <Button
                               type="button"
                               size={"icon"}
-                              className="bg-background/50 hover:bg-background/50 absolute top-1 right-1 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100 duration-300 transition-all"
+                              className="bg-background/60 hover:bg-background/80 backdrop-blur-sm absolute top-1 right-1 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100 duration-300 transition-all"
                             >
                               <MoreVerticalIcon className="text-foreground" />
                             </Button>
