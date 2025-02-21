@@ -165,6 +165,19 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       }
     },
   });
+  const revalidate = trpc.videos.revalidate.useMutation({
+    onSuccess: () => {
+      toast.success("Video has been revalidated successfully");
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({ id: videoId });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      if (error?.data?.code === "UNAUTHORIZED") {
+        clerk.openSignIn();
+      }
+    },
+  });
   const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
     onSuccess: () => {
       toast.success("Video thumbnail has been restored successfully");
@@ -265,6 +278,11 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     onClick={() => remove.mutate({ id: videoId })}
                   >
                     <TrashIcon className="size-4 mr-2" /> Delete
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => revalidate.mutate({ id: videoId })}
+                  >
+                    <RotateCcw className="size-4 mr-2" /> Revalidate
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

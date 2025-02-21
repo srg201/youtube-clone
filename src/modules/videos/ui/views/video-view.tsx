@@ -1,6 +1,6 @@
 import React from "react";
 import VideoSection from "../sections/video-section";
-import SuggestionsSection from "../sections/suggestions-sections";
+import SuggestionsSection from "../sections/suggestions-section";
 import CommentsSection from "../sections/comments-section";
 
 interface VideoViewProps {
