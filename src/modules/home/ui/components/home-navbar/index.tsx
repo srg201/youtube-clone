@@ -7,15 +7,17 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const HomeNavbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-background flex items-center px-2 pr-5 z-50">
-      <div className="flex items-center gap-4 w-full">
+    <nav className="fixed top-0 left-0 right-0 h-16 bg-background flex items-center px-2 z-50">
+      <div className="flex items-center gap-2 sm:gap-4 w-full">
         {/* Menu and Logo  */}
         <div className="flex items-center flex-shrink-0">
           <SidebarTrigger />
           <Link href={"/"}>
-            <div className="p-4 flex items-center gap-1 cursor-pointer">
+            <div className="p-1 sm:p-4 flex items-center gap-1 cursor-pointer">
               <Image src={"/logo.svg"} width={32} height={32} alt="Logo" />
-              <p className="tracking-tight font-semibold text-xl">NewTube</p>
+              <p className="tracking-tight font-semibold text-xl hidden sm:block">
+                NewTube
+              </p>
             </div>
           </Link>
         </div>
