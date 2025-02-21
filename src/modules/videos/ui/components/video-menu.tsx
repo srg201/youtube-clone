@@ -24,7 +24,7 @@ interface VideoMenuProps {
 const VideoMenu = ({
   onRemove,
   videoId,
-  variant = "secondary",
+  variant = "ghost",
 }: VideoMenuProps) => {
   const onShare = () => {
     const fullUrl = `${
