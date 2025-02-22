@@ -42,13 +42,13 @@ const MainSection = () => {
               <SidebarMenuButton
                 asChild
                 tooltip={item.title}
-                isActive={false} // TODO: Change to look at current route
+                isActive={false}
                 onClick={(e) => {
                   if (!isSignedIn && item.auth) {
                     e.preventDefault();
                     return clerk.openSignIn();
                   }
-                }} // TODO: DO something on click
+                }}
               >
                 <Link href={item.url} className="flex items-center gap-4">
                   <item.icon />

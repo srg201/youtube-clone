@@ -15,7 +15,6 @@ interface VideoReactionProps {
   viewerReaction: VideoGetOneOutput["viewerReaction"];
 }
 
-// TODO: properly implement video reactions
 const VideoReactions = ({
   dislikes,
   likes,
@@ -28,7 +27,7 @@ const VideoReactions = ({
   const like = trpc.videoReactions.like.useMutation({
     onSuccess: () => {
       utils.videos.getOne.invalidate({ id: videoId });
-      //  TODO: invalidate liked playlists
+      utils.playlists.getLikedVideos.invalidate();
     },
     onError: (error) => {
       toast.error("Something went wrong...");
@@ -40,7 +39,6 @@ const VideoReactions = ({
   const dislike = trpc.videoReactions.dislike.useMutation({
     onSuccess: () => {
       utils.videos.getOne.invalidate({ id: videoId });
-      //  TODO: invalidate liked playlists
     },
     onError: (error) => {
       toast.error("Something went wrong...");

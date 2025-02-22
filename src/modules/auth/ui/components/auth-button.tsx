@@ -4,7 +4,6 @@ import { ClapperboardIcon, UserCircleIcon } from "lucide-react";
 import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 const AuthButton = () => {
-  // TODO: Add different states
   return (
     <>
       <SignedIn>
@@ -17,7 +16,6 @@ const AuthButton = () => {
             />
           </UserButton.MenuItems>
         </UserButton>
-        {/* Add menu items or other components here */}
       </SignedIn>
       <SignedOut>
         <SignInButton mode="modal">

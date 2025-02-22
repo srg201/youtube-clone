@@ -24,8 +24,6 @@ const VideoThumbnail = ({
 }: VideoThumbnailProps) => {
   return (
     <div className="relative group">
-      {/* Thumbnail Wrapper  */}
-
       <div className="relative w-full overflow-hidden transition-all rounded-xl aspect-video">
         <Image
           src={imageUrl ?? THUMBNAIL_FALLBACK}
@@ -41,9 +39,6 @@ const VideoThumbnail = ({
           className="opacity-0 size-full object-cover group-hover:opacity-100"
         />
       </div>
-
-      {/* Video Duration Box  */}
-      {/* TODO: Add video duration box  */}
 
       <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-background/50 text-foreground text-xs font-medium">
         {formatDuration(duration)}

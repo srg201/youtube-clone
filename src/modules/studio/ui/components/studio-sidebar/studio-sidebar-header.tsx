@@ -6,12 +6,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import UserAvatar from "@/components/user-avatar";
-import { useUser } from "@clerk/nextjs";
-import Link from "next/link";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 const StudioSidebarHeader = () => {
   const { user } = useUser();
   const { state } = useSidebar();
+  const clerk = useClerk();
 
   if (!user) {
     return (
@@ -27,30 +27,31 @@ const StudioSidebarHeader = () => {
 
   if (state === "collapsed") {
     return (
-      <SidebarMenuItem>
+      <SidebarMenuItem onClick={() => clerk.openUserProfile()}>
         <SidebarMenuButton tooltip={"Your profile"} asChild>
-          <Link href={"/users/current"}>
+          <div className="flex flex-col gap-1">
             <UserAvatar
               imageUrl={user.imageUrl}
               name={user.fullName ?? "User"}
               size="xs"
             />
             <span className="text-sm">Your Profile</span>
-          </Link>
+          </div>
         </SidebarMenuButton>
       </SidebarMenuItem>
     );
   }
 
   return (
-    <SidebarHeader className="flex items-center justify-center pb-4">
-      <Link href={"/users/current"}>
-        <UserAvatar
-          imageUrl={user?.imageUrl}
-          name={user?.fullName ?? "User"}
-          className="size-28 hover:opacity-80 transition-opacity"
-        />
-      </Link>
+    <SidebarHeader
+      onClick={() => clerk.openUserProfile()}
+      className="flex items-center justify-center pb-4 cursor-pointer"
+    >
+      <UserAvatar
+        imageUrl={user?.imageUrl}
+        name={user?.fullName ?? "User"}
+        className="size-28 hover:opacity-80 transition-opacity"
+      />
       <div className="flex flex-col mt-2 items-center gap-y-2">
         <p className="text-sm font-medium">Your Profile</p>
         <p className="text-xs text-muted-foreground">{user?.fullName}</p>

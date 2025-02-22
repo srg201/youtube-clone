@@ -219,7 +219,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     update.mutate(data);
   };
 
-  //TODO: Change if deployng outside Vercel
   const fullUrl = `${APP_URL}/videos/${videoId}`;
 
   const onCopy = async () => {

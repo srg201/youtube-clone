@@ -21,7 +21,6 @@ interface VideoMenuProps {
   onRemove?: () => void;
 }
 
-// TODO: implement whats left
 const VideoMenu = ({
   onRemove,
   videoId,
